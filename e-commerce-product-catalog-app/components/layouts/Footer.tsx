@@ -18,7 +18,7 @@ const Footer = () => {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="text-2xl text-white hover:scale-105">
               <Image
-                src="/images/logo.png"
+                src="/assets/images/logo.png"
                 alt="App Logo"
                 width={78.73}
                 height={40.6}
