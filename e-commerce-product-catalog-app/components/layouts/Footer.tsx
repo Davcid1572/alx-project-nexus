@@ -13,7 +13,7 @@ const Footer = () => {
                 }
             `}</style>
 
-      <footer className="px-6 md:px-16 lg:px-24 xl:px-32 w-full text-sm text-slate-500 bg-white pt-10">
+      <footer className="px-6 md:px-16 lg:px-24 xl:px-32 w-full text-sm text-slate-500 border-t border-gray-300 bg-white pt-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="text-2xl text-white hover:scale-105">
