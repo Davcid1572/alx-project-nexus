@@ -84,7 +84,13 @@ const Header = () => {
         <Link href="/products" onClick={() => setOpen(false)}>
           Products
         </Link>
-        <Link href="/products" onClick={() => setOpen(false)}>
+        <Link
+          href="/cart"
+          onClick={() => {
+            setOpen(false);
+            router.push("/cart");
+          }}
+        >
           My Orders
         </Link>
         <Link href="/contact" onClick={() => setOpen(false)}>
