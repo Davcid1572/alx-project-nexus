@@ -165,9 +165,13 @@ import ProductCard from "@/components/ProductCard";
 
 const Products = () => {
   const dispatch = useAppDispatch();
-  const { items, selectedCategory, loading, error } = useAppSelector(
-    (state) => state.products,
-  );
+  // const { items, selectedCategory, loading, error } = useAppSelector(
+  //   (state) => state.products,
+  // );
+
+  // 1. Destructure searchQuery from the products slice
+  const { items, selectedCategory, loading, error, searchQuery } =
+    useAppSelector((state) => state.products);
 
   // 1. Create a state to track the current sort order
   const [sortOrder, setSortOrder] = useState<"default" | "asc" | "desc">(
@@ -182,9 +186,21 @@ const Products = () => {
   }, [dispatch, items.length]);
 
   // 2. Filter products by category first
-  const filteredProducts = selectedCategory
-    ? items.filter((item) => item.category === selectedCategory)
-    : items;
+  // const filteredProducts = selectedCategory
+  //   ? items.filter((item) => item.category === selectedCategory)
+  //   : items;
+
+  const filteredProducts = items.filter((item) => {
+    const matchesCategory = selectedCategory
+      ? item.category === selectedCategory
+      : true;
+
+    const matchesSearch = searchQuery
+      ? item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      : true;
+
+    return matchesCategory && matchesSearch;
+  });
 
   // 3. Apply sorting logic to the filtered list
   // We use [...array] to create a copy because .sort() modifies the original array

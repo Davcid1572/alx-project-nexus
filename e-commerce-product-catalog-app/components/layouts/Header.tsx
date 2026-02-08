@@ -2,12 +2,15 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useAppSelector } from "@/utils/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/utils/store/hooks";
+import { setSearchQuery } from "@/utils/store/slices/productsSlice";
 
 const Header = () => {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const cartCount = useAppSelector((state) => state.cart.totalQuantity);
+  const searchQuery = useAppSelector((state) => state.products.searchQuery);
 
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -35,6 +38,8 @@ const Header = () => {
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
             type="text"
             placeholder="Search products"
+            value={searchQuery}
+            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
           />
           <img src={"assets/images/search_icon.svg"} alt="Search Icon" />
         </div>

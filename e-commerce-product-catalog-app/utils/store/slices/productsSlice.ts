@@ -5,6 +5,7 @@ interface ProductsState {
   items: Product[];
   categories: string[]; // Store category names from API
   selectedCategory: string | null;
+  searchQuery: string;
   loading: boolean;
   error: string | null;
 }
@@ -12,6 +13,7 @@ interface ProductsState {
 const initialState: ProductsState = {
   items: [],
   categories: [],
+  searchQuery: "",
   selectedCategory: null,
   loading: false,
   error: null,
@@ -43,6 +45,9 @@ const productsSlice = createSlice({
     setSelectedCategory: (state, action: PayloadAction<string | null>) => {
       state.selectedCategory = action.payload;
     },
+    setSearchQuery(state, action: PayloadAction<string>) {
+      state.searchQuery = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -65,5 +70,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const { setSelectedCategory } = productsSlice.actions;
+export const { setSelectedCategory, setSearchQuery } = productsSlice.actions;
 export default productsSlice.reducer;
