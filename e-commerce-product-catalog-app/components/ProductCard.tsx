@@ -1,5 +1,8 @@
 import React from "react";
-import { Product } from "@/interfaces"; // Assuming your interface is here
+import { Product } from "@/interfaces";
+import { useAppDispatch } from "@/utils/store/hooks";
+import { addToCart, removeFromCart } from "@/utils/store/slices/cartSlice";
+// Assuming your interface is here
 
 interface ProductCardProps {
   product: Product;
@@ -7,6 +10,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const [count, setCount] = React.useState(0);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full">
@@ -54,13 +58,21 @@ const ProductCard = ({ product }: ProductCardProps) => {
             {count === 0 ? (
               <button
                 className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-20 w-16 h-8.5 rounded text-indigo-600 font-medium"
-                onClick={() => setCount(1)}
+                onClick={() => {
+                  setCount(1);
+                  dispatch(addToCart(product));
+                }}
               >
                 Add
               </button>
             ) : (
               <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-8.5 bg-indigo-500 rounded text-white select-none">
-                <button onClick={() => setCount((p) => Math.max(p - 1, 0))}>
+                <button
+                  onClick={() => {
+                    setCount((p) => Math.max(p - 1, 0));
+                    dispatch(removeFromCart(product.id));
+                  }}
+                >
                   -
                 </button>
                 <span>{count}</span>

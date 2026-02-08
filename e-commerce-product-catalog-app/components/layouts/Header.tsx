@@ -2,10 +2,12 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useAppSelector } from "@/utils/store/hooks";
 
 const Header = () => {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
+  const cartCount = useAppSelector((state) => state.cart.totalQuantity);
 
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -43,7 +45,7 @@ const Header = () => {
         >
           <img src={"assets/images/cart_icon.svg"} alt="Cart Icon" />
           <button className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-4.5 h-4.5 rounded-full">
-            3
+            {cartCount}
           </button>
         </div>
         <div className="relative group">
