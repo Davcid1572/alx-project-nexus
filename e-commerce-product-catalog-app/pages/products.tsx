@@ -198,7 +198,7 @@ const Products = () => {
   });
 
   return (
-    <div className="mt-12 min-h-[400px]">
+    <div className="mt-12 min-h-100">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
           <h2 className="text-2xl md:text-3xl font-bold capitalize text-gray-800">
